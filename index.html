@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Happy Birthday, Mly! — Made with love by Ciel</title>
+
+  <!-- Google Fonts: Pixel Art yang tetap nyaman dibaca -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       1. VARIABLES & RESET (BLUE PIXEL ROMANTIC THEME)
+    ========================================================= */
+    :root {
+      --bg-deep: #0b1633;
+      --bg-night: #12244d;
+      --bg-sky: #1e3b70;
+      --blue-pastel: #9ecbff;
+      --blue-soft: #cde6ff;
+      --blue-ice: #eef7ff;
+      --lavender: #cbb8ff;
+      --pink-soft: #ffb8d9;
+      --white: #ffffff;
+      --pixel-border: #5a8fd6;
+      --pixel-shadow: #071026;
+      --card-bg: rgba(16, 33, 74, 0.82);
+      --card-light: rgba(235, 245, 255, 0.94);
+      --text-light: #f2f8ff;
+      --text-muted: #b7d3f7;
+      --text-dark: #162952;
+
+      --font-title: 'Press Start 2P', 'Silkscreen', monospace;
+      --font-accent: 'Silkscreen', monospace;
+      --font-body: 'Pixelify Sans', 'Courier New', sans-serif;
+
+      --radius-pixel: 0px;
+      --transition-smooth: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-night) 35%, #193468 70%, #244a8c 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      max-width: 100%;
+      overflow-x: hidden;
+      line-height: 1.65;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img, svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .pixel-art {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      shape-rendering: crispEdges;
+    }
+
+    /* Pixel Box & Button Helpers */
+    .pixel-panel {
+      background: var(--card-bg);
+      border: 4px solid var(--blue-pastel);
+      box-shadow:
+        0 0 0 4px var(--bg-deep),
+        6px 6px 0 4px rgba(5, 12, 32, 0.65),
+        inset 0 0 24px rgba(158, 203, 255, 0.12);
+      position: relative;
+    }
+
+    .pixel-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: var(--font-accent);
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      color: var(--bg-deep);
+      background: linear-gradient(180deg, #dff0ff 0%, #9ecbff 100%);
+      border: 3px solid var(--white);
+      box-shadow:
+        0 4px 0 #4d83cc,
+        0 8px 18px rgba(0, 10, 35, 0.45);
+      padding: 0.85rem 1.45rem;
+      min-height: 46px;
+      min-width: 46px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.2s ease;
+      user-select: none;
+    }
+
+    .pixel-btn:hover {
+      filter: brightness(1.06);
+      transform: translateY(-2px);
+    }
+
+    .pixel-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #4d83cc, 0 3px 8px rgba(0, 10, 35, 0.4);
+    }
+
+    .pixel-btn--pink {
+      background: linear-gradient(180deg, #ffe8f3 0%, #ffb8d9 100%);
+      box-shadow: 0 4px 0 #c96e9b, 0 8px 18px rgba(0, 10, 35, 0.4);
+    }
+
+    .pixel-btn--pink:active {
+      box-shadow: 0 1px 0 #c96e9b;
+    }
+
+    /* =========================================================
+       2. GLOBAL BACKGROUND STARS & CONFETTI CANVAS
+    ========================================================= */
+    .starfield {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .pixel-star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--white);
+      box-shadow: 0 0 6px var(--blue-pastel);
+      animation: twinkle var(--dur, 3s) steps(3, end) infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .pixel-star.star-blue {
+      background: var(--blue-pastel);
+    }
+
+    .pixel-star.star-pink {
+      background: var(--pink-soft);
+    }
+
+    .pixel-star.star-cross::before,
+    .pixel-star.star-cross::after {
+      content: '';
+      position: absolute;
+      background: inherit;
+    }
+    .pixel-star.star-cross::before {
+      width: 12px;
+      height: 4px;
+      left: -4px;
+      top: 0;
+    }
+    .pixel-star.star-cross::after {
+      width: 4px;
+      height: 12px;
+      left: 0;
+      top: -4px;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.25; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 60;
+    }
+
+    /* =========================================================
+       3. OPENING SCREEN (HALAMAN PEMBUKA)
+    ========================================================= */
+    .opening-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: radial-gradient(circle at 50% 25%, #1d3c78 0%, #0d1b3e 55%, #070f26 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+      overflow: hidden;
+      transition: opacity 0.9s ease, transform 0.9s ease, visibility 0.9s ease;
+    }
+
+    .opening-screen.is-hidden {
+      opacity: 0;
+      transform: scale(1.04);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .opening-clouds {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .cloud-float {
+      position: absolute;
+      opacity: 0.82;
+      animation: driftCloud var(--speed, 28s) linear infinite;
+    }
+
+    .cloud-1 { top: 14%; left: -120px; width: clamp(90px, 20vw, 150px); --speed: 32s; }
+    .cloud-2 { top: 28%; left: -160px; width: clamp(110px, 24vw, 180px); --speed: 44s; animation-delay: -15s; opacity: 0.6; }
+    .cloud-3 { bottom: 16%; left: -140px; width: clamp(100px, 22vw, 165px); --speed: 38s; animation-delay: -8s; opacity: 0.7; }
+
+    @keyframes driftCloud {
+      from { transform: translateX(-180px); }
+      to { transform: translateX(calc(100vw + 220px)); }
+    }
+
+    .opening-moon-wrap {
+      width: clamp(95px, 24vw, 140px);
+      margin-bottom: 1.25rem;
+      animation: floatGentle 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 18px rgba(158, 203, 255, 0.55));
+    }
+
+    .opening-content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .opening-badge {
+      font-family: var(--font-accent);
+      font-size: clamp(0.68rem, 2.2vw, 0.8rem);
+      letter-spacing: 1px;
+      color: var(--blue-soft);
+      background: rgba(158, 203, 255, 0.14);
+      border: 2px solid rgba(158, 203, 255, 0.45);
+      padding: 0.35rem 0.8rem;
+    }
+
+    .opening-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(1.35rem, 4.8vw, 2.15rem);
+      color: var(--white);
+      text-shadow: 0 3px 0 var(--bg-deep), 0 0 16px rgba(158, 203, 255, 0.45);
+      line-height: 1.4;
+    }
+
+    .opening-sub {
+      font-size: clamp(0.95rem, 2.8vw, 1.08rem);
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       4. FLOATING TOP BAR & AUDIO CONTROL
+    ========================================================= */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      width: 100%;
+      padding: 0.65rem 1rem;
+      background: rgba(10, 21, 50, 0.84);
+      backdrop-filter: blur(8px);
+      border-bottom: 3px solid rgba(158, 203, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-tag {
+      font-family: var(--font-accent);
+      font-size: clamp(0.72rem, 2.2vw, 0.88rem);
+      color: var(--blue-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-pill {
+      font-family: var(--font-accent);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.4rem 0.7rem;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-pill:hover {
+      color: var(--white);
+      border-color: var(--blue-pastel);
+      background: rgba(158, 203, 255, 0.14);
+    }
+
+    .music-toggle {
+      font-family: var(--font-accent);
+      font-size: clamp(0.7rem, 2vw, 0.8rem);
+      color: var(--bg-deep);
+      background: var(--blue-pastel);
+      border: 2px solid var(--white);
+      padding: 0.45rem 0.8rem;
+      min-height: 40px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 3px 0 #4678bd;
+      transition: transform 0.15s ease;
+    }
+
+    .music-toggle:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #4678bd;
+    }
+
+    .music-toggle.is-off {
+      background: #233b6e;
+      color: var(--text-muted);
+      border-color: #6b8fc7;
+      box-shadow: 0 3px 0 #101e3d;
+    }
+
+    /* =========================================================
+       5. MAIN LAYOUT CONTAINER & SECTION COMMONS
+    ========================================================= */
+    .main-world {
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .main-world.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3.5vw, 2rem);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(1.5rem, 4vw, 2.75rem);
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-family: var(--font-accent);
+      font-size: clamp(0.7rem, 2vw, 0.82rem);
+      color: var(--blue-pastel);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.05rem, 3.4vw, 1.65rem);
+      color: var(--white);
+      line-height: 1.5;
+      text-shadow: 3px 3px 0 var(--bg-deep), 0 0 18px rgba(158, 203, 255, 0.38);
+    }
+
+    .section-desc {
+      margin-top: 0.65rem;
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 2.6vw, 1.1rem);
+      max-width: 620px;
+      margin-inline: auto;
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       6. HERO SECTION (HALAMAN UTAMA)
+    ========================================================= */
+    .hero-section {
+      padding-top: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .hero-card {
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(22, 48, 102, 0.88) 0%, rgba(16, 33, 74, 0.92) 100%);
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .hero-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-pill {
+      font-family: var(--font-accent);
+      font-size: clamp(0.72rem, 2vw, 0.84rem);
+      color: var(--pink-soft);
+      background: rgba(255, 184, 217, 0.12);
+      border: 2px solid rgba(255, 184, 217, 0.5);
+      padding: 0.35rem 0.85rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.3rem, 4.6vw, 2.25rem);
+      line-height: 1.45;
+      color: var(--white);
+      text-shadow: 4px 4px 0 #0a1738, 0 0 22px rgba(158, 203, 255, 0.55);
+    }
+
+    .hero-title span {
+      color: var(--blue-pastel);
+    }
+
+    .hero-greeting {
+      font-size: clamp(1rem, 2.7vw, 1.18rem);
+      color: var(--blue-ice);
+      max-width: 540px;
+    }
+
+    .hero-credit {
+      font-family: var(--font-accent);
+      font-size: clamp(0.72rem, 2.1vw, 0.85rem);
+      color: var(--blue-pastel);
+    }
+
+    /* Pixel Scenery Diorama */
+    .scenery-box {
+      width: 100%;
+      max-width: 520px;
+      border: 4px solid var(--blue-pastel);
+      background: linear-gradient(180deg, #1b3d7a 0%, #3d75bf 55%, #7bb8f5 80%, #3d6b99 80%, #244a75 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 25px rgba(9, 20, 48, 0.45), 0 10px 25px rgba(4, 10, 28, 0.5);
+      aspect-ratio: 16 / 10;
+    }
+
+    .scenery-clouds {
+      position: absolute;
+      top: 10%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      pointer-events: none;
+    }
+
+    .scenery-cloud-item {
+      width: 18%;
+      animation: floatGentle 5s ease-in-out infinite;
+    }
+
+    .scenery-moon {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      width: 14%;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+      animation: floatGentle 4s ease-in-out infinite reverse;
+    }
+
+    .scenery-butterfly {
+      position: absolute;
+      width: 7%;
+      animation: butterflyFlight 6s ease-in-out infinite;
+    }
+    .butterfly-a { top: 38%; left: 20%; }
+    .butterfly-b { top: 32%; right: 24%; animation-delay: -2.8s; }
+
+    @keyframes butterflyFlight {
+      0%, 100% { transform: translate(0, 0) scaleX(1); }
+      25% { transform: translate(14px, -12px) scaleX(0.85); }
+      50% { transform: translate(26px, 4px) scaleX(1); }
+      75% { transform: translate(10px, -8px) scaleX(0.85); }
+    }
+
+    .scenery-ground {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 26%;
+      background: linear-gradient(180deg, #3b7c9e 0%, #285678 100%);
+      border-top: 4px solid #82c8ff;
+    }
+
+    .scenery-cottage {
+      position: absolute;
+      bottom: 18%;
+      left: 10%;
+      width: 28%;
+    }
+
+    .scenery-character {
+      position: absolute;
+      bottom: 18%;
+      left: 46%;
+      width: 13%;
+      animation: gentleBob 2.2s steps(2, end) infinite;
+    }
+
+    @keyframes gentleBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .scenery-flowers {
+      position: absolute;
+      bottom: 14%;
+      right: 6%;
+      width: 30%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .flower-sway {
+      width: 26%;
+      transform-origin: bottom center;
+      animation: swayWind 3.2s ease-in-out infinite;
+    }
+    .flower-sway:nth-child(2) { animation-delay: -1.1s; }
+    .flower-sway:nth-child(3) { animation-delay: -2.1s; }
+
+    @keyframes swayWind {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* =========================================================
+       7. SPECIAL SECTION: MLY SEPERTI BULAN (BY CIEL)
+    ========================================================= */
+    .moon-story-card {
+      padding: clamp(1.5rem, 4.5vw, 3rem);
+      background: radial-gradient(circle at 20% 20%, rgba(56, 108, 194, 0.35), rgba(11, 22, 51, 0.92));
+      border-color: var(--blue-soft);
+    }
+
+    .moon-story-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .moon-sanctuary {
+      width: 100%;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .moon-orbit-frame {
+      width: clamp(170px, 46vw, 240px);
+      aspect-ratio: 1;
+      border: 4px dashed rgba(158, 203, 255, 0.55);
+      background: radial-gradient(circle, rgba(158, 203, 255, 0.22) 0%, rgba(16, 33, 74, 0.65) 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .moon-orbit-frame:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 32px rgba(158, 203, 255, 0.45);
+    }
+
+    .moon-orbit-frame svg {
+      width: 78%;
+      animation: floatGentle 4.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 18px rgba(210, 234, 255, 0.8));
+    }
+
+    .moon-caption-tag {
+      font-family: var(--font-accent);
+      font-size: 0.75rem;
+      color: var(--blue-pastel);
+      text-align: center;
+    }
+
+    .moon-poem-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .moon-poem-title {
+      font-family: var(--font-title);
+      font-size: clamp(0.95rem, 2.8vw, 1.3rem);
+      color: var(--blue-soft);
+      line-height: 1.5;
+    }
+
+    .moon-poem-text {
+      font-size: clamp(1rem, 2.6vw, 1.15rem);
+      color: var(--blue-ice);
+      line-height: 1.8;
+    }
+
+    .moon-quote-highlight {
+      border-left: 4px solid var(--blue-pastel);
+      padding: 0.75rem 1rem;
+      background: rgba(158, 203, 255, 0.1);
+      color: var(--white);
+      font-style: italic;
+    }
+
+    .author-signature {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      align-self: flex-end;
+      font-family: var(--font-accent);
+      font-size: clamp(0.78rem, 2.2vw, 0.92rem);
+      color: var(--pink-soft);
+      background: rgba(255, 184, 217, 0.1);
+      border: 2px solid rgba(255, 184, 217, 0.45);
+      padding: 0.45rem 0.9rem;
+    }
+
+    /* =========================================================
+       8. GALERI KENANGAN (LITTLE MEMORIES OF MLY)
+    ========================================================= */
+    .memories-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .memory-card {
+      background: var(--card-light);
+      color: var(--text-dark);
+      border: 4px solid var(--blue-pastel);
+      box-shadow: 0 0 0 4px var(--bg-deep), 6px 6px 0 4px rgba(4, 12, 34, 0.55);
+      padding: 0.9rem 0.9rem 1.2rem;
+      cursor: pointer;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+      position: relative;
+    }
+
+    .memory-card:hover,
+    .memory-card:focus-visible {
+      transform: translateY(-6px) rotate(-0.8deg);
+      box-shadow: 0 0 0 4px var(--white), 10px 12px 0 4px rgba(4, 12, 34, 0.65);
+      outline: none;
+    }
+
+    .memory-card:active {
+      transform: scale(0.98);
+    }
+
+    .memory-card.is-popped {
+      animation: cardPop 0.45s ease;
+    }
+
+    @keyframes cardPop {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.04) translateY(-6px); }
+      100% { transform: scale(1); }
+    }
+
+    .memory-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border: 3px solid var(--text-dark);
+      overflow: hidden;
+      background: #1a376e;
+      position: relative;
+    }
+
+    .memory-frame svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .memory-card:hover .memory-frame svg {
+      transform: scale(1.06);
+    }
+
+    .memory-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-family: var(--font-accent);
+      font-size: 0.68rem;
+      background: rgba(11, 22, 51, 0.85);
+      color: var(--blue-soft);
+      padding: 0.2rem 0.45rem;
+      border: 2px solid var(--blue-pastel);
+    }
+
+    .memory-caption-title {
+      margin-top: 0.85rem;
+      font-family: var(--font-accent);
+      font-size: clamp(0.84rem, 2.3vw, 0.96rem);
+      color: #16326b;
+    }
+
+    .memory-caption-text {
+      margin-top: 0.35rem;
+      font-size: clamp(0.9rem, 2.3vw, 1rem);
+      color: #365082;
+      line-height: 1.5;
+    }
+
+    .memory-hint {
+      margin-top: 0.55rem;
+      display: inline-block;
+      font-family: var(--font-accent);
+      font-size: 0.68rem;
+      color: #4f79bd;
+    }
+
+    /* =========================================================
+       9. PESAN SPESIAL (PIXEL ENVELOPE & MAILBOX)
+    ========================================================= */
+    .letter-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .envelope-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .pixel-envelope {
+      width: clamp(190px, 48vw, 260px);
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 12px 20px rgba(4, 10, 28, 0.6));
+    }
+
+    .envelope-stage:hover .pixel-envelope {
+      transform: translateY(-5px) scale(1.03);
+    }
+
+    .envelope-flap {
+      transform-origin: top center;
+      transition: transform 0.6s ease;
+    }
+
+    .envelope-stage.is-open .envelope-flap {
+      transform: scaleY(-0.55);
+    }
+
+    .letter-paper {
+      width: 100%;
+      background: linear-gradient(180deg, #f5faff 0%, #e4f1ff 100%);
+      color: var(--text-dark);
+      border: 4px solid var(--blue-pastel);
+      box-shadow: 0 0 0 4px var(--bg-deep), 8px 8px 0 4px rgba(4, 10, 30, 0.6);
+      padding: clamp(1.4rem, 4.5vw, 2.5rem);
+      display: none;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .letter-paper.is-visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      border-bottom: 3px dashed #8bb8ee;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .letter-to {
+      font-family: var(--font-accent);
+      font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+      color: #1b3d7a;
+    }
+
+    .letter-date {
+      font-family: var(--font-accent);
+      font-size: 0.74rem;
+      color: #547bb5;
+    }
+
+    .letter-line {
+      font-size: clamp(1rem, 2.6vw, 1.14rem);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .letter-line.show-line {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-sign {
+      margin-top: 1.25rem;
+      font-family: var(--font-accent);
+      font-size: clamp(0.85rem, 2.4vw, 1rem);
+      color: #214e99;
+      text-align: right;
+    }
+
+    /* =========================================================
+       10. BAGIAN KEJUTAN (BLUE CAKE & FINALE)
+    ========================================================= */
+    .cake-panel {
+      padding: clamp(1.5rem, 5vw, 3rem);
+      text-align: center;
+      background: linear-gradient(180deg, rgba(21, 46, 98, 0.92) 0%, rgba(12, 26, 61, 0.95) 100%);
+      overflow: hidden;
+    }
+
+    .cake-stage {
+      position: relative;
+      max-width: 340px;
+      margin: 0 auto 1.5rem;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cake-svg-wrap {
+      width: clamp(200px, 55vw, 270px);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      filter: drop-shadow(0 14px 22px rgba(3, 10, 30, 0.65));
+    }
+
+    .cake-svg-wrap:hover {
+      transform: scale(1.03);
+    }
+
+    /* Flickering candle flames */
+    .candle-flame {
+      transform-origin: center bottom;
+      animation: flameFlicker 0.45s steps(2, end) infinite alternate;
+      transition: opacity 0.4s ease;
+    }
+
+    .candle-flame:nth-child(2) { animation-delay: 0.15s; }
+    .candle-flame:nth-child(3) { animation-delay: 0.3s; }
+
+    .cake-stage.candles-blown .candle-flame {
+      opacity: 0;
+      animation: none;
+    }
+
+    @keyframes flameFlicker {
+      0% { transform: scaleY(1) scaleX(1); }
+      100% { transform: scaleY(1.18) scaleX(0.88); }
+    }
+
+    .floating-hearts-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .mini-float-icon {
+      width: 24px;
+      animation: floatGentle 2.6s ease-in-out infinite;
+    }
+    .mini-float-icon:nth-child(2) { animation-delay: 0.6s; }
+    .mini-float-icon:nth-child(3) { animation-delay: 1.2s; }
+
+    .finale-headline {
+      font-family: var(--font-title);
+      font-size: clamp(0.95rem, 3.1vw, 1.45rem);
+      color: var(--blue-pastel);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .finale-wish {
+      font-size: clamp(1rem, 2.8vw, 1.22rem);
+      color: var(--white);
+      max-width: 620px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.75;
+    }
+
+    .cake-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .wish-feedback {
+      min-height: 1.6rem;
+      font-family: var(--font-accent);
+      font-size: clamp(0.75rem, 2.2vw, 0.88rem);
+      color: var(--pink-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    /* =========================================================
+       11. FOOTER
+    ========================================================= */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      border-top: 3px solid rgba(158, 203, 255, 0.25);
+      background: rgba(7, 15, 38, 0.7);
+    }
+
+    .footer-text {
+      font-family: var(--font-accent);
+      font-size: clamp(0.74rem, 2.2vw, 0.88rem);
+      color: var(--blue-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       12. RESPONSIVE BREAKPOINTS (TABLET & DESKTOP)
+    ========================================================= */
+    /* Tablet (>= 640px) */
+    @media (min-width: 640px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .memories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+      }
+
+      .memory-card:nth-child(even) {
+        transform: translateY(10px);
+      }
+
+      .memory-card:nth-child(even):hover {
+        transform: translateY(2px) rotate(0.8deg);
+      }
+    }
+
+    /* Laptop & Desktop (>= 960px) */
+    @media (min-width: 960px) {
+      .hero-grid {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+        gap: 2.5rem;
+      }
+
+      .hero-text-col {
+        align-items: flex-start;
+        flex: 1.05;
+      }
+
+      .scenery-box {
+        flex: 1;
+        max-width: 500px;
+      }
+
+      .moon-story-grid {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .memories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.85rem;
+      }
+
+      .memory-card:nth-child(2),
+      .memory-card:nth-child(5) {
+        transform: translateY(16px);
+      }
+
+      .memory-card:nth-child(2):hover,
+      .memory-card:nth-child(5):hover {
+        transform: translateY(6px) rotate(0.8deg);
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Stars -->
+  <div class="starfield" id="starfield" aria-hidden="true"></div>
+  <!-- Confetti Overlay -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- =========================================================
+       2. HALAMAN PEMBUKA (OPENING SCREEN)
+  ========================================================= -->
+  <section class="opening-screen" id="opening-screen" aria-label="Halaman Pembuka">
+    <div class="opening-clouds" aria-hidden="true">
+      <!-- Pixel Cloud 1 -->
+      <svg class="cloud-float cloud-1 pixel-art" viewBox="0 0 32 16" fill="none">
+        <rect x="8" y="4" width="14" height="4" fill="#cde6ff"/>
+        <rect x="4" y="6" width="22" height="6" fill="#9ecbff"/>
+        <rect x="2" y="8" width="28" height="4" fill="#eef7ff"/>
+        <rect x="12" y="2" width="8" height="4" fill="#ffffff"/>
+      </svg>
+      <!-- Pixel Cloud 2 -->
+      <svg class="cloud-float cloud-2 pixel-art" viewBox="0 0 32 16" fill="none">
+        <rect x="6" y="4" width="18" height="4" fill="#cde6ff"/>
+        <rect x="2" y="7" width="26" height="5" fill="#9ecbff"/>
+        <rect x="10" y="2" width="10" height="4" fill="#eef7ff"/>
+      </svg>
+      <!-- Pixel Cloud 3 -->
+      <svg class="cloud-float cloud-3 pixel-art" viewBox="0 0 32 16" fill="none">
+        <rect x="8" y="4" width="16" height="4" fill="#cbb8ff"/>
+        <rect x="4" y="7" width="24" height="5" fill="#9ecbff"/>
+        <rect x="12" y="2" width="8" height="4" fill="#ffffff"/>
+      </svg>
+    </div>
+
+    <div class="opening-content">
+      <!-- Glowing Pixel Moon -->
+      <div class="opening-moon-wrap">
+        <svg class="pixel-art" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="8" y="2" width="8" height="2" fill="#eef7ff"/>
+          <rect x="5" y="4" width="14" height="2" fill="#dff0ff"/>
+          <rect x="4" y="6" width="16" height="4" fill="#cde6ff"/>
+          <rect x="3" y="10" width="18" height="4" fill="#9ecbff"/>
+          <rect x="4" y="14" width="16" height="4" fill="#9ecbff"/>
+          <rect x="5" y="18" width="14" height="2" fill="#7cb6f7"/>
+          <rect x="8" y="20" width="8" height="2" fill="#7cb6f7"/>
+          <!-- Craters -->
+          <rect x="8" y="7" width="3" height="3" fill="#b4d6ff"/>
+          <rect x="14" y="12" width="4" height="3" fill="#7cb6f7"/>
+          <rect x="7" y="15" width="2" height="2" fill="#7cb6f7"/>
+          <!-- Highlight -->
+          <rect x="7" y="5" width="4" height="2" fill="#ffffff"/>
+        </svg>
+      </div>
+
+      <span class="opening-badge">MADE WITH LOVE FOR MLY • BY CIEL</span>
+      <h1 class="opening-title">Ada sesuatu yang spesial untukmu, Mly...</h1>
+      <p class="opening-sub">Sebuah dunia pixel kecil di bawah langit biru malam, dirangkai pelan-pelan khusus untuk ulang tahunmu.</p>
+
+      <button class="pixel-btn" id="open-surprise-btn" type="button">
+        <span>✨ Buka Kejutan</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STICKY NAVIGATION & MUSIC TOGGLE
+  ========================================================= -->
+  <header class="topbar" id="topbar">
+    <div class="brand-tag">
+      <span>🌙</span>
+      <span>Mly's Blue World</span>
+    </div>
+
+    <nav class="nav-links" aria-label="Navigasi">
+      <a class="nav-pill" href="#hero">Beranda</a>
+      <a class="nav-pill" href="#moon-story">Sang Bulan</a>
+      <a class="nav-pill" href="#memories">Kenangan</a>
+      <a class="nav-pill" href="#letter">Pesan</a>
+      <a class="nav-pill" href="#cake">Kejutan</a>
+    </nav>
+
+    <button class="music-toggle is-off" id="music-toggle-btn" type="button" aria-pressed="false">
+      <span id="music-icon">♪</span>
+      <span id="music-label">Musik: OFF</span>
+    </button>
+  </header>
+
+  <!-- =========================================================
+       MAIN WORLD
+  ========================================================= -->
+  <main class="main-world" id="main-world">
+
+    <!-- 3. HALAMAN UTAMA (HERO SCENERY) -->
+    <section class="container hero-section" id="hero">
+      <div class="pixel-panel hero-card">
+        <div class="hero-grid">
+          <div class="hero-text-col">
+            <span class="hero-pill">💙 SPECIAL DAY FOR MLY</span>
+            <h2 class="hero-title">Happy Birthday, <span>Mly!</span></h2>
+            <p class="hero-greeting">
+              Selamat ulang tahun untuk seseorang yang kehadirannya selalu membuat hari terasa lebih tenang, hangat, dan penuh warna biru yang meneduhkan. Semoga semua hal indah di dunia ini pelan-pelan selalu menemukan jalan ke arahmu.
+            </p>
+            <p class="hero-credit">Made with love for Mly — ditulis oleh Ciel</p>
+            <a class="pixel-btn pixel-btn--pink" href="#moon-story">Baca Cerita Bulan ↓</a>
+          </div>
+
+          <!-- Pixel Art Scenery Diorama -->
+          <div class="scenery-box" aria-label="Ilustrasi pemandangan pixel art untuk Mly">
+            <!-- Pixel Moon -->
+            <svg class="scenery-moon pixel-art" viewBox="0 0 16 16" fill="none">
+              <rect x="5" y="1" width="6" height="2" fill="#ffffff"/>
+              <rect x="3" y="3" width="10" height="2" fill="#eef7ff"/>
+              <rect x="2" y="5" width="12" height="6" fill="#cde6ff"/>
+              <rect x="3" y="11" width="10" height="2" fill="#9ecbff"/>
+              <rect x="5" y="13" width="6" height="2" fill="#9ecbff"/>
+              <rect x="5" y="6" width="2" height="2" fill="#9ecbff"/>
+              <rect x="9" y="9" width="3" height="2" fill="#7cb6f7"/>
+            </svg>
+
+            <!-- Clouds -->
+            <div class="scenery-clouds">
+              <svg class="scenery-cloud-item pixel-art" viewBox="0 0 24 12" fill="none">
+                <rect x="6" y="2" width="10" height="3" fill="#ffffff"/>
+                <rect x="2" y="5" width="18" height="4" fill="#dff0ff"/>
+                <rect x="4" y="9" width="14" height="2" fill="#9ecbff"/>
+              </svg>
+              <svg class="scenery-cloud-item pixel-art" style="animation-delay: -2s" viewBox="0 0 24 12" fill="none">
+                <rect x="8" y="3" width="8" height="3" fill="#ffffff"/>
+                <rect x="4" y="6" width="16" height="4" fill="#cde6ff"/>
+              </svg>
+            </div>
+
+            <!-- Butterflies -->
+            <svg class="scenery-butterfly butterfly-a pixel-art" viewBox="0 0 12 10" fill="none">
+              <rect x="1" y="1" width="4" height="4" fill="#ffb8d9"/>
+              <rect x="7" y="1" width="4" height="4" fill="#ffb8d9"/>
+              <rect x="2" y="5" width="3" height="3" fill="#cbb8ff"/>
+              <rect x="7" y="5" width="3" height="3" fill="#cbb8ff"/>
+              <rect x="5" y="2" width="2" height="6" fill="#162952"/>
+            </svg>
+            <svg class="scenery-butterfly butterfly-b pixel-art" viewBox="0 0 12 10" fill="none">
+              <rect x="1" y="1" width="4" height="4" fill="#9ecbff"/>
+              <rect x="7" y="1" width="4" height="4" fill="#9ecbff"/>
+              <rect x="2" y="5" width="3" height="3" fill="#ffffff"/>
+              <rect x="7" y="5" width="3" height="3" fill="#ffffff"/>
+              <rect x="5" y="2" width="2" height="6" fill="#162952"/>
+            </svg>
+
+            <!-- Ground -->
+            <div class="scenery-ground"></div>
+
+            <!-- Pixel Cottage (Rumah Kecil) -->
+            <svg class="scenery-cottage pixel-art" viewBox="0 0 28 24" fill="none">
+              <!-- Chimney & Smoke -->
+              <rect x="19" y="2" width="3" height="6" fill="#5a8fd6"/>
+              <rect x="20" y="0" width="2" height="1" fill="#eef7ff"/>
+              <!-- Roof -->
+              <rect x="10" y="4" width="8" height="2" fill="#3a6ab8"/>
+              <rect x="6" y="6" width="16" height="2" fill="#4f85d6"/>
+              <rect x="3" y="8" width="22" height="3" fill="#70a7f5"/>
+              <!-- Walls -->
+              <rect x="5" y="11" width="18" height="11" fill="#eef7ff"/>
+              <rect x="5" y="11" width="18" height="2" fill="#cde6ff"/>
+              <!-- Door -->
+              <rect x="8" y="15" width="5" height="7" fill="#4f85d6"/>
+              <rect x="11" y="18" width="1" height="1" fill="#ffe680"/>
+              <!-- Warm Window -->
+              <rect x="16" y="14" width="5" height="4" fill="#3a6ab8"/>
+              <rect x="17" y="15" width="3" height="2" fill="#ffe680"/>
+            </svg>
+
+            <!-- Small Decorative Pixel Character -->
+            <svg class="scenery-character pixel-art" viewBox="0 0 14 20" fill="none">
+              <!-- Hair / Head -->
+              <rect x="4" y="1" width="6" height="2" fill="#1f3b73"/>
+              <rect x="3" y="3" width="8" height="4" fill="#ffe0d1"/>
+              <rect x="3" y="3" width="2" height="4" fill="#1f3b73"/>
+              <rect x="9" y="3" width="2" height="4" fill="#1f3b73"/>
+              <rect x="5" y="4" width="1" height="1" fill="#162952"/>
+              <rect x="8" y="4" width="1" height="1" fill="#162952"/>
+              <!-- Blue Scarf & Coat -->
+              <rect x="4" y="7" width="6" height="2" fill="#9ecbff"/>
+              <rect x="3" y="9" width="8" height="6" fill="#4f85d6"/>
+              <rect x="2" y="10" width="1" height="4" fill="#ffe0d1"/>
+              <rect x="11" y="9" width="1" height="4" fill="#ffe0d1"/>
+              <!-- Tiny Heart held -->
+              <rect x="11" y="7" width="1" height="1" fill="#ffb8d9"/>
+              <rect x="12" y="7" width="1" height="1" fill="#ffb8d9"/>
+              <rect x="11" y="8" width="2" height="1" fill="#ffb8d9"/>
+              <!-- Boots -->
+              <rect x="4" y="15" width="2" height="4" fill="#162952"/>
+              <rect x="8" y="15" width="2" height="4" fill="#162952"/>
+            </svg>
+
+            <!-- Swaying Pixel Flowers -->
+            <div class="scenery-flowers">
+              <svg class="flower-sway pixel-art" viewBox="0 0 10 14" fill="none">
+                <rect x="4" y="6" width="2" height="8" fill="#5fb3a2"/>
+                <rect x="2" y="9" width="2" height="2" fill="#5fb3a2"/>
+                <rect x="3" y="1" width="4" height="4" fill="#9ecbff"/>
+                <rect x="1" y="2" width="2" height="2" fill="#cde6ff"/>
+                <rect x="7" y="2" width="2" height="2" fill="#cde6ff"/>
+                <rect x="4" y="2" width="2" height="2" fill="#ffffff"/>
+              </svg>
+              <svg class="flower-sway pixel-art" viewBox="0 0 10 14" fill="none">
+                <rect x="4" y="5" width="2" height="9" fill="#5fb3a2"/>
+                <rect x="6" y="8" width="2" height="2" fill="#5fb3a2"/>
+                <rect x="3" y="0" width="4" height="4" fill="#ffb8d9"/>
+                <rect x="1" y="1" width="2" height="2" fill="#ffe0ef"/>
+                <rect x="7" y="1" width="2" height="2" fill="#ffe0ef"/>
+                <rect x="4" y="1" width="2" height="2" fill="#fff099"/>
+              </svg>
+              <svg class="flower-sway pixel-art" viewBox="0 0 10 14" fill="none">
+                <rect x="4" y="6" width="2" height="8" fill="#5fb3a2"/>
+                <rect x="3" y="1" width="4" height="4" fill="#cbb8ff"/>
+                <rect x="1" y="2" width="2" height="2" fill="#e8deff"/>
+                <rect x="7" y="2" width="2" height="2" fill="#e8deff"/>
+                <rect x="4" y="2" width="2" height="2" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         HALAMAN SPESIAL: CERITA TENTANG MLY SEPERTI BULAN (BY CIEL)
+    ========================================================= -->
+    <section class="container reveal" id="moon-story">
+      <div class="section-header">
+        <span class="section-kicker">✦ HALAMAN SPESIAL UNTUK MLY ✦</span>
+        <h2 class="section-title">Seperti Bulan di Langit Biru</h2>
+        <p class="section-desc">Sebuah catatan kecil tentang bagaimana Mly selalu terasa seindah bulan di malam yang tenang.</p>
+      </div>
+
+      <div class="pixel-panel moon-story-card">
+        <div class="moon-story-grid">
+          <div class="moon-sanctuary">
+            <div class="moon-orbit-frame" id="moon-touch" title="Sentuh bulan untuk kilauan kecil">
+              <svg class="pixel-art" viewBox="0 0 32 32" fill="none" aria-label="Ilustrasi pixel bulan biru bersinar">
+                <!-- Halo -->
+                <rect x="10" y="2" width="12" height="2" fill="rgba(158,203,255,0.3)"/>
+                <rect x="6" y="4" width="20" height="2" fill="rgba(158,203,255,0.25)"/>
+                <!-- Moon Body -->
+                <rect x="11" y="5" width="10" height="2" fill="#ffffff"/>
+                <rect x="8" y="7" width="16" height="3" fill="#eef7ff"/>
+                <rect x="6" y="10" width="20" height="5" fill="#d9edff"/>
+                <rect x="5" y="15" width="22" height="5" fill="#b7d9ff"/>
+                <rect x="6" y="20" width="20" height="3" fill="#9ecbff"/>
+                <rect x="8" y="23" width="16" height="2" fill="#82b8f7"/>
+                <rect x="11" y="25" width="10" height="2" fill="#6da6eb"/>
+                <!-- Craters & Soft Shading -->
+                <rect x="11" y="10" width="4" height="3" fill="#b7d9ff"/>
+                <rect x="19" y="14" width="4" height="4" fill="#82b8f7"/>
+                <rect x="10" y="18" width="3" height="3" fill="#82b8f7"/>
+                <rect x="15" y="21" width="3" height="2" fill="#6da6eb"/>
+                <!-- Cute Sparkles -->
+                <rect x="2" y="8" width="2" height="2" fill="#ffb8d9"/>
+                <rect x="28" y="10" width="2" height="2" fill="#ffffff"/>
+                <rect x="4" y="24" width="2" height="2" fill="#cbb8ff"/>
+              </svg>
+            </div>
+            <span class="moon-caption-tag" id="moon-caption-tag">✨ Sentuh bulannya, Mly</span>
+          </div>
+
+          <div class="moon-poem-box">
+            <h3 class="moon-poem-title">Mengapa Mly Seperti Bulan yang Indah</h3>
+            <p class="moon-poem-text">
+              Di antara luasnya langit malam yang gelap, bulan tidak pernah perlu berisik untuk membuktikan keindahannya. Ia hanya hadir dengan tenang, memancarkan cahaya biru lembut yang sanggup meneduhkan siapa saja yang menatapnya.
+            </p>
+            <p class="moon-poem-text">
+              Begitulah dirimu, <strong>Mly</strong>. Kamu seperti bulan itu—selalu punya cara untuk membuat malam yang berat terasa lebih ringan, membuat waktu yang berjalan terasa lebih berarti, dan tetap indah dalam setiap fase kehidupanmu.
+            </p>
+            <blockquote class="moon-quote-highlight">
+              "Bahkan ketika dunia sedang sibuk dan langit berubah warna, Mly tetap menjadi bulan paling indah yang selalu layak dikagumi—hari ini, besok, dan seterusnya."
+            </blockquote>
+            <div class="author-signature">
+              <span>🌙</span>
+              <span>Ditulis oleh Ciel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. GALERI KENANGAN (LITTLE MEMORIES OF MLY)
+    ========================================================= -->
+    <section class="container reveal" id="memories">
+      <div class="section-header">
+        <span class="section-kicker">✦ PIXEL GALLERY ✦</span>
+        <h2 class="section-title">Little Memories of Mly</h2>
+        <p class="section-desc">Potongan suasana kecil yang selalu mengingatkan pada manisnya kehadiran Mly. Sentuh atau klik bingkainya!</p>
+      </div>
+
+      <div class="memories-grid">
+        <!-- Memory 1 -->
+        <article class="memory-card" tabindex="0">
+          <div class="memory-frame">
+            <span class="memory-tag">#01</span>
+            <svg class="pixel-art" viewBox="0 0 64 48" fill="none">
+              <rect width="64" height="48" fill="#1a3a73"/>
+              <rect y="28" width="64" height="20" fill="#2d5ca8"/>
+              <rect y="36" width="64" height="12" fill="#4f85d6"/>
+              <!-- Clouds & Crescent Moon -->
+              <rect x="44" y="6" width="8" height="8" fill="#eef7ff"/>
+              <rect x="47" y="7" width="6" height="6" fill="#1a3a73"/>
+              <rect x="8" y="10" width="16" height="4" fill="#9ecbff"/>
+              <rect x="12" y="8" width="8" height="2" fill="#ffffff"/>
+              <!-- Water Reflection -->
+              <rect x="42" y="34" width="10" height="2" fill="#cde6ff"/>
+              <rect x="44" y="39" width="6" height="2" fill="#9ecbff"/>
+              <rect x="10" y="4" width="2" height="2" fill="#ffffff"/>
+              <rect x="28" y="12" width="2" height="2" fill="#ffb8d9"/>
+            </svg>
+          </div>
+          <h3 class="memory-caption-title">Langit Biru &amp; Pantulan Bulan</h3>
+          <p class="memory-caption-text">Sama seperti tenang air laut di malam hari yang memeluk cahaya bulan, selalu ada rasa damai setiap mengingatmu, Mly.</p>
+          <span class="memory-hint">✦ Klik untuk animasi</span>
+        </article>
+
+        <!-- Memory 2 -->
+        <article class="memory-card" tabindex="0">
+          <div class="memory-frame">
+            <span class="memory-tag">#02</span>
+            <svg class="pixel-art" viewBox="0 0 64 48" fill="none">
+              <rect width="64" height="48" fill="#3a75c4"/>
+              <rect y="24" width="64" height="24" fill="#63a4eb"/>
+              <rect y="34" width="64" height="14" fill="#3c7391"/>
+              <!-- Fluffy Sky Clouds -->
+              <rect x="10" y="8" width="20" height="6" fill="#ffffff"/>
+              <rect x="14" y="5" width="12" height="3" fill="#eef7ff"/>
+              <rect x="38" y="12" width="18" height="5" fill="#dff0ff"/>
+              <!-- Pink & Blue Pixel Flowers -->
+              <rect x="14" y="32" width="2" height="8" fill="#82e0c4"/>
+              <rect x="12" y="28" width="6" height="4" fill="#ffb8d9"/>
+              <rect x="30" y="30" width="2" height="10" fill="#82e0c4"/>
+              <rect x="28" y="26" width="6" height="4" fill="#cde6ff"/>
+              <rect x="48" y="33" width="2" height="7" fill="#82e0c4"/>
+              <rect x="46" y="29" width="6" height="4" fill="#cbb8ff"/>
+            </svg>
+          </div>
+          <h3 class="memory-caption-title">Taman Sore yang Lembut</h3>
+          <p class="memory-caption-text">Hal-hal sederhana seperti bunga kecil dan awan biru selalu terasa lebih hidup saat diceritakan bersamamu.</p>
+          <span class="memory-hint">✦ Klik untuk animasi</span>
+        </article>
+
+        <!-- Memory 3 -->
+        <article class="memory-card" tabindex="0">
+          <div class="memory-frame">
+            <span class="memory-tag">#03</span>
+            <svg class="pixel-art" viewBox="0 0 64 48" fill="none">
+              <rect width="64" height="48" fill="#10214a"/>
+              <!-- Cozy Window -->
+              <rect x="16" y="8" width="32" height="28" fill="#294e8f"/>
+              <rect x="19" y="11" width="12" height="10" fill="#4f85d6"/>
+              <rect x="33" y="11" width="12" height="10" fill="#4f85d6"/>
+              <rect x="19" y="23" width="12" height="10" fill="#7cb6f7"/>
+              <rect x="33" y="23" width="12" height="10" fill="#7cb6f7"/>
+              <!-- Shooting Star outside -->
+              <rect x="22" y="13" width="6" height="2" fill="#ffffff"/>
+              <rect x="26" y="15" width="3" height="2" fill="#ffe680"/>
+              <!-- Teacup on Sill -->
+              <rect x="27" y="36" width="10" height="6" fill="#eef7ff"/>
+              <rect x="37" y="37" width="3" height="4" fill="#cde6ff"/>
+              <rect x="30" y="32" width="1" height="3" fill="#ffb8d9"/>
+              <rect x="33" y="31" width="1" height="4" fill="#ffb8d9"/>
+            </svg>
+          </div>
+          <h3 class="memory-caption-title">Obrolan Tengah Malam</h3>
+          <p class="memory-caption-text">Waktu yang berjalan pelan, cerita ringan sebelum tidur, dan tawa kecil yang tak pernah membosankan.</p>
+          <span class="memory-hint">✦ Klik untuk animasi</span>
+        </article>
+
+        <!-- Memory 4 -->
+        <article class="memory-card" tabindex="0">
+          <div class="memory-frame">
+            <span class="memory-tag">#04</span>
+            <svg class="pixel-art" viewBox="0 0 64 48" fill="none">
+              <rect width="64" height="48" fill="#173166"/>
+              <!-- Star Constellation M -->
+              <rect x="14" y="30" width="2" height="2" fill="#ffffff"/>
+              <rect x="20" y="16" width="3" height="3" fill="#9ecbff"/>
+              <rect x="31" y="24" width="3" height="3" fill="#ffb8d9"/>
+              <rect x="42" y="16" width="3" height="3" fill="#9ecbff"/>
+              <rect x="48" y="30" width="2" height="2" fill="#ffffff"/>
+              <!-- Dotted pixel lines -->
+              <rect x="16" y="24" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="18" y="20" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="25" y="19" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="28" y="22" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="36" y="21" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="39" y="19" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="45" y="22" width="2" height="2" fill="#5a8fd6"/>
+              <rect x="47" y="26" width="2" height="2" fill="#5a8fd6"/>
+            </svg>
+          </div>
+          <h3 class="memory-caption-title">Rasi Bintang Berinisial M</h3>
+          <p class="memory-caption-text">Seolah langit malam diam-diam ikut merangkai titik bintang menjadi namamu—Mly.</p>
+          <span class="memory-hint">✦ Klik untuk animasi</span>
+        </article>
+
+        <!-- Memory 5 -->
+        <article class="memory-card" tabindex="0">
+          <div class="memory-frame">
+            <span class="memory-tag">#05</span>
+            <svg class="pixel-art" viewBox="0 0 64 48" fill="none">
+              <rect width="64" height="48" fill="#234b8e"/>
+              <rect y="34" width="64" height="14" fill="#173166"/>
+              <!-- Blue Ribbon Gift -->
+              <rect x="20" y="18" width="24" height="18" fill="#9ecbff"/>
+              <rect x="18" y="16" width="28" height="4" fill="#cde6ff"/>
+              <rect x="30" y="16" width="4" height="20" fill="#ffffff"/>
+              <rect x="20" y="25" width="24" height="3" fill="#ffffff"/>
+              <rect x="25" y="12" width="5" height="4" fill="#ffb8d9"/>
+              <rect x="34" y="12" width="5" height="4" fill="#ffb8d9"/>
+              <rect x="30" y="13" width="4" height="3" fill="#ffe680"/>
+            </svg>
+          </div>
+          <h3 class="memory-caption-title">Hadiah Kecil dari Hati</h3>
+          <p class="memory-caption-text">Bukan tentang seberapa besar hadiahnya, melainkan doa baik yang selalu terselip di setiap langkahmu.</p>
+          <span class="memory-hint">✦ Klik untuk animasi</span>
+        </article>
+
+        <!-- Memory 6 -->
+        <article class="memory-card" tabindex="0">
+          <div class="memory-frame">
+            <span class="memory-tag">#06</span>
+            <svg class="pixel-art" viewBox="0 0 64 48" fill="none">
+              <rect width="64" height="48" fill="#1b3b75"/>
+              <rect x="10" y="8" width="44" height="32" fill="#2f5da8"/>
+              <!-- Pixel Heart & Butterflies -->
+              <rect x="24" y="16" width="6" height="4" fill="#9ecbff"/>
+              <rect x="34" y="16" width="6" height="4" fill="#9ecbff"/>
+              <rect x="22" y="20" width="20" height="6" fill="#cde6ff"/>
+              <rect x="25" y="26" width="14" height="4" fill="#9ecbff"/>
+              <rect x="28" y="30" width="8" height="3" fill="#7cb6f7"/>
+              <rect x="30" y="33" width="4" height="2" fill="#7cb6f7"/>
+              <rect x="14" y="12" width="3" height="3" fill="#ffb8d9"/>
+              <rect x="47" y="12" width="3" height="3" fill="#ffb8d9"/>
+            </svg>
+          </div>
+          <h3 class="memory-caption-title">Tetaplah Bersinar, Mly</h3>
+          <p class="memory-caption-text">Untuk tahun baru usiamu: semoga lebih banyak senyum tulus, hari-hari biru yang cerah, dan mimpi yang terwujud.</p>
+          <span class="memory-hint">✦ Klik untuk animasi</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. PESAN SPESIAL (KOTAK SURAT / AMPLOP PIXEL ART)
+    ========================================================= -->
+    <section class="container reveal" id="letter">
+      <div class="section-header">
+        <span class="section-kicker">✦ PESAN SPESIAL ✦</span>
+        <h2 class="section-title">Sepucuk Surat untuk Mly</h2>
+        <p class="section-desc">Ketuk amplop pixel di bawah ini untuk membuka surat dari Ciel.</p>
+      </div>
+
+      <div class="letter-wrapper">
+        <div class="envelope-stage" id="envelope-stage" role="button" tabindex="0" aria-expanded="false" aria-label="Buka amplop pesan spesial untuk Mly">
+          <!-- Pixel Art Envelope -->
+          <svg class="pixel-envelope pixel-art" viewBox="0 0 36 26" fill="none">
+            <!-- Base -->
+            <rect x="2" y="4" width="32" height="20" fill="#cde6ff"/>
+            <rect x="0" y="4" width="2" height="20" fill="#162952"/>
+            <rect x="34" y="4" width="2" height="20" fill="#162952"/>
+            <rect x="2" y="2" width="32" height="2" fill="#162952"/>
+            <rect x="2" y="24" width="32" height="2" fill="#162952"/>
+            <!-- Inner Shadow -->
+            <rect x="4" y="6" width="28" height="16" fill="#eef7ff"/>
+            <!-- Flap -->
+            <g class="envelope-flap">
+              <rect x="4" y="4" width="28" height="3" fill="#9ecbff"/>
+              <rect x="7" y="7" width="22" height="3" fill="#9ecbff"/>
+              <rect x="11" y="10" width="14" height="3" fill="#7cb6f7"/>
+              <rect x="15" y="13" width="6" height="2" fill="#7cb6f7"/>
+            </g>
+            <!-- Heart Seal -->
+            <rect x="15" y="12" width="2" height="2" fill="#ffb8d9"/>
+            <rect x="19" y="12" width="2" height="2" fill="#ffb8d9"/>
+            <rect x="15" y="14" width="6" height="2" fill="#ff8ec4"/>
+            <rect x="17" y="16" width="2" height="2" fill="#ff8ec4"/>
+          </svg>
+
+          <button class="pixel-btn" id="open-letter-btn" type="button">
+            <span>💌 Buka Amplop Surat</span>
+          </button>
+        </div>
+
+        <article class="letter-paper" id="letter-paper" aria-live="polite">
+          <div class="letter-header">
+            <span class="letter-to">Untuk: Mly</span>
+            <span class="letter-date">Dari: Ciel 🌙</span>
+          </div>
+
+          <p class="letter-line">Hai Mly, selamat ulang tahun ya.</p>
+          <p class="letter-line">
+            Hari ini adalah hari yang spesial, bukan hanya karena usiamu bertambah satu tahun lagi, tapi karena dunia pernah dihadiahi seseorang sebaik dan selembut dirimu.
+          </p>
+          <p class="letter-line">
+            Seperti bulan yang selalu setia menerangi langit biru malam tanpa pernah meminta balasan, kehadiranmu selalu membawa rasa tenang. Di saat hari-hari terasa berat, mengingat senyummu dan caramu menghadapi banyak hal selalu terasa mengagumkan.
+          </p>
+          <p class="letter-line">
+            Di tahun barumu ini, aku berharap kamu tidak pernah lupa untuk menjaga dirimu sendiri sebaik kamu menyayangi orang lain. Semoga hatimu selalu lapang, langkahmu dimudahkan, dan hal-hal kecil yang membuatmu bahagia selalu datang tepat waktu.
+          </p>
+          <p class="letter-line">
+            Terima kasih sudah menjadi Mly yang begitu berarti. Tetaplah bersinar pelan-pelan, dengan cahayamu sendiri.
+          </p>
+
+          <div class="letter-sign letter-line">
+            Dengan hangat,<br />
+            <strong>Ciel 💙</strong>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. BAGIAN KEJUTAN (BLUE BIRTHDAY CAKE & FINALE)
+    ========================================================= -->
+    <section class="container reveal" id="cake">
+      <div class="pixel-panel cake-panel">
+        <div class="floating-hearts-row" aria-hidden="true">
+          <svg class="mini-float-icon pixel-art" viewBox="0 0 10 9" fill="none">
+            <rect x="1" y="1" width="3" height="3" fill="#9ecbff"/>
+            <rect x="6" y="1" width="3" height="3" fill="#9ecbff"/>
+            <rect x="0" y="2" width="10" height="3" fill="#cde6ff"/>
+            <rect x="2" y="5" width="6" height="2" fill="#9ecbff"/>
+            <rect x="4" y="7" width="2" height="2" fill="#7cb6f7"/>
+          </svg>
+          <svg class="mini-float-icon pixel-art" viewBox="0 0 10 9" fill="none">
+            <rect x="1" y="1" width="3" height="3" fill="#ffb8d9"/>
+            <rect x="6" y="1" width="3" height="3" fill="#ffb8d9"/>
+            <rect x="0" y="2" width="10" height="3" fill="#ffd6e9"/>
+            <rect x="2" y="5" width="6" height="2" fill="#ffb8d9"/>
+            <rect x="4" y="7" width="2" height="2" fill="#ff94c5"/>
+          </svg>
+          <svg class="mini-float-icon pixel-art" viewBox="0 0 10 9" fill="none">
+            <rect x="1" y="1" width="3" height="3" fill="#cbb8ff"/>
+            <rect x="6" y="1" width="3" height="3" fill="#cbb8ff"/>
+            <rect x="0" y="2" width="10" height="3" fill="#e5dbff"/>
+            <rect x="2" y="5" width="6" height="2" fill="#cbb8ff"/>
+            <rect x="4" y="7" width="2" height="2" fill="#a78bfa"/>
+          </svg>
+        </div>
+
+        <span class="section-kicker">✦ BLUE BIRTHDAY CAKE FOR MLY ✦</span>
+
+        <div class="cake-stage" id="cake-stage">
+          <!-- Detailed Blue Pixel Art Birthday Cake -->
+          <div class="cake-svg-wrap" id="cake-trigger" role="button" tabindex="0" aria-label="Kue ulang tahun biru untuk Mly, klik untuk merayakan">
+            <svg class="pixel-art" viewBox="0 0 40 40" fill="none">
+              <!-- Candle Flames -->
+              <g class="candle-flame">
+                <rect x="12" y="2" width="2" height="3" fill="#ffe680"/>
+                <rect x="12" y="1" width="2" height="1" fill="#ffffff"/>
+              </g>
+              <g class="candle-flame">
+                <rect x="19" y="1" width="2" height="4" fill="#ffe680"/>
+                <rect x="19" y="0" width="2" height="1" fill="#ffffff"/>
+              </g>
+              <g class="candle-flame">
+                <rect x="26" y="2" width="2" height="3" fill="#ffe680"/>
+                <rect x="26" y="1" width="2" height="1" fill="#ffffff"/>
+              </g>
+
+              <!-- Candles -->
+              <rect x="12" y="6" width="2" height="6" fill="#ffffff"/>
+              <rect x="12" y="8" width="2" height="1" fill="#ffb8d9"/>
+              <rect x="19" y="6" width="2" height="6" fill="#cde6ff"/>
+              <rect x="19" y="8" width="2" height="1" fill="#4f85d6"/>
+              <rect x="26" y="6" width="2" height="6" fill="#ffffff"/>
+              <rect x="26" y="8" width="2" height="1" fill="#ffb8d9"/>
+
+              <!-- Top Tier (Pastel Sky Blue) -->
+              <rect x="10" y="12" width="20" height="9" fill="#7cb6f7"/>
+              <!-- White/Ice Blue Cream Drips on Top Tier -->
+              <rect x="9" y="11" width="22" height="3" fill="#eef7ff"/>
+              <rect x="11" y="14" width="3" height="2" fill="#eef7ff"/>
+              <rect x="18" y="14" width="4" height="3" fill="#eef7ff"/>
+              <rect x="26" y="14" width="3" height="2" fill="#eef7ff"/>
+              <!-- Sprinkles -->
+              <rect x="14" y="17" width="2" height="1" fill="#ffb8d9"/>
+              <rect x="23" y="18" width="2" height="1" fill="#ffffff"/>
+
+              <!-- Bottom Tier (Royal Pastel Blue) -->
+              <rect x="6" y="21" width="28" height="12" fill="#4f85d6"/>
+              <!-- Frosting Rim -->
+              <rect x="5" y="20" width="30" height="3" fill="#cde6ff"/>
+              <rect x="8" y="23" width="3" height="3" fill="#cde6ff"/>
+              <rect x="15" y="23" width="4" height="2" fill="#cde6ff"/>
+              <rect x="24" y="23" width="3" height="3" fill="#cde6ff"/>
+              <rect x="30" y="23" width="2" height="2" fill="#cde6ff"/>
+
+              <!-- Little Pixel Heart Decoration on Cake -->
+              <rect x="17" y="26" width="2" height="2" fill="#ffb8d9"/>
+              <rect x="21" y="26" width="2" height="2" fill="#ffb8d9"/>
+              <rect x="17" y="28" width="6" height="2" fill="#ff94c5"/>
+              <rect x="19" y="30" width="2" height="1" fill="#ff94c5"/>
+
+              <!-- Blue Cake Dots -->
+              <rect x="9" y="29" width="2" height="2" fill="#eef7ff"/>
+              <rect x="29" y="29" width="2" height="2" fill="#eef7ff"/>
+
+              <!-- Cake Plate -->
+              <rect x="3" y="33" width="34" height="3" fill="#ffffff"/>
+              <rect x="6" y="36" width="28" height="2" fill="#9ecbff"/>
+            </svg>
+          </div>
+        </div>
+
+        <p class="wish-feedback" id="wish-feedback"></p>
+
+        <div class="cake-actions">
+          <button class="pixel-btn" id="blow-candles-btn" type="button">🕯️ Buat Permohonan &amp; Tiup Lilin</button>
+          <button class="pixel-btn pixel-btn--pink" id="confetti-btn" type="button">🎉 Tebar Konfeti!</button>
+        </div>
+
+        <h2 class="finale-headline">This little world was made just for you, Mly.</h2>
+        <p class="finale-wish">
+          "Semoga hari-harimu selalu dipenuhi hal-hal baik. Tetaplah menjadi Mly yang istimewa."
+        </p>
+        <p class="hero-credit">With love, Ciel 🌙💙</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-text">Made with love for Mly • Written by Ciel</p>
+    <p class="footer-sub">Happy Birthday, Mly! Semoga langit biru selalu menjaga senyummu.</p>
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT: AUDIO SYNTHESIZER, CONFETTI, & INTERACTIONS
+  ========================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* -------------------------------------------------------
+         1. STARFIELD GENERATOR
+      ------------------------------------------------------- */
+      const starfield = document.getElementById('starfield');
+      const starCount = window.innerWidth < 640 ? 45 : 85;
+      const starColors = ['', 'star-blue', 'star-pink'];
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('span');
+        const isCross = i % 7 === 0;
+        const colorClass = starColors[i % starColors.length];
+        star.className = `pixel-star ${colorClass} ${isCross ? 'star-cross' : ''}`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.setProperty('--dur', `${2.2 + Math.random() * 3.5}s`);
+        star.style.setProperty('--delay', `${Math.random() * 3}s`);
+        starfield.appendChild(star);
+      }
+
+      /* -------------------------------------------------------
+         2. SOFT INSTRUMENTAL WEB AUDIO (MUSIC BOX + SFX)
+         (Tidak autoplay sebelum ada interaksi pengguna!)
+      ------------------------------------------------------- */
+      let audioCtx = null;
+      let isMusicPlaying = false;
+      let melodyTimer = null;
+      let noteIndex = 0;
+
+      // Soft dreamy lullaby + gentle birthday motif (frequencies in Hz)
+      const melodyNotes = [
+        { f: 523.25, d: 0.45 }, // C5
+        { f: 523.25, d: 0.45 }, // C5
+        { f: 587.33, d: 0.75 }, // D5
+        { f: 523.25, d: 0.75 }, // C5
+        { f: 698.46, d: 0.75 }, // F5
+        { f: 659.25, d: 1.15 }, // E5
+
+        { f: 523.25, d: 0.45 }, // C5
+        { f: 523.25, d: 0.45 }, // C5
+        { f: 587.33, d: 0.75 }, // D5
+        { f: 523.25, d: 0.75 }, // C5
+        { f: 783.99, d: 0.75 }, // G5
+        { f: 698.46, d: 1.15 }, // F5
+
+        { f: 523.25, d: 0.45 }, // C5
+        { f: 523.25, d: 0.45 }, // C5
+        { f: 1046.50, d: 0.75 }, // C6
+        { f: 880.00, d: 0.75 }, // A5
+        { f: 698.46, d: 0.75 }, // F5
+        { f: 659.25, d: 0.75 }, // E5
+        { f: 587.33, d: 1.0 },  // D5
+
+        { f: 932.33, d: 0.45 }, // Bb5
+        { f: 932.33, d: 0.45 }, // Bb5
+        { f: 880.00, d: 0.75 }, // A5
+        { f: 698.46, d: 0.75 }, // F5
+        { f: 783.99, d: 0.75 }, // G5
+        { f: 698.46, d: 1.35 }  // F5
+      ];
+
+      function initAudioContext() {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            audioCtx = new AudioContextClass();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function playTone(freq, duration, volume = 0.06, type = 'sine') {
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now);
+
+        // Soft music-box envelope
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.exponentialRampToValueAtTime(volume, now + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0008, now + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + duration + 0.05);
+      }
+
+      function playClickSfx(pitch = 784) {
+        initAudioContext();
+        playTone(pitch, 0.14, 0.055, 'triangle');
+        setTimeout(() => playTone(pitch * 1.25, 0.16, 0.04, 'sine'), 55);
+      }
+
+      function scheduleNextNote() {
+        if (!isMusicPlaying) return;
+        const note = melodyNotes[noteIndex % melodyNotes.length];
+        // Main bell tone + warm octave undertone
+        playTone(note.f, note.d * 1.15, 0.05, 'sine');
+        playTone(note.f * 0.5, note.d * 1.1, 0.02, 'triangle');
+
+        noteIndex++;
+        melodyTimer = setTimeout(scheduleNextNote, note.d * 780);
+      }
+
+      const musicToggleBtn = document.getElementById('music-toggle-btn');
+      const musicLabel = document.getElementById('music-label');
+
+      function setMusicState(turnOn) {
+        initAudioContext();
+        isMusicPlaying = turnOn;
+        musicToggleBtn.setAttribute('aria-pressed', String(turnOn));
+
+        if (turnOn) {
+          musicToggleBtn.classList.remove('is-off');
+          musicLabel.textContent = 'Musik: ON';
+          clearTimeout(melodyTimer);
+          scheduleNextNote();
+        } else {
+          musicToggleBtn.classList.add('is-off');
+          musicLabel.textContent = 'Musik: OFF';
+          clearTimeout(melodyTimer);
+        }
+      }
+
+      musicToggleBtn.addEventListener('click', () => {
+        playClickSfx(660);
+        setMusicState(!isMusicPlaying);
+      });
+
+      /* -------------------------------------------------------
+         3. CONFETTI PIXEL SYSTEM
+      ------------------------------------------------------- */
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      let confettiPieces = [];
+      let confettiAnimId = null;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function launchConfetti(amount = 85) {
+        const colors = ['#9ecbff', '#ffffff', '#cde6ff', '#ffb8d9', '#cbb8ff', '#ffe680'];
+        for (let i = 0; i < amount; i++) {
+          confettiPieces.push({
+            x: Math.random() * canvas.width,
+            y: -15 - Math.random() * 140,
+            size: 6 + Math.floor(Math.random() * 6),
+            vx: (Math.random() - 0.5) * 3.5,
+            vy: 2.2 + Math.random() * 3.8,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: 1
+          });
+        }
+        if (!confettiAnimId) {
+          animateConfetti();
+        }
+      }
+
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettiPieces.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.y > canvas.height * 0.78) {
+            p.alpha -= 0.02;
+          }
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(Math.round(p.x), Math.round(p.y), p.size, p.size);
+        });
+        ctx.globalAlpha = 1;
+        confettiPieces = confettiPieces.filter((p) => p.y < canvas.height + 20 && p.alpha > 0);
+
+        if (confettiPieces.length > 0) {
+          confettiAnimId = requestAnimationFrame(animateConfetti);
+        } else {
+          confettiAnimId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      /* -------------------------------------------------------
+         4. OPENING SCREEN TRANSITION
+      ------------------------------------------------------- */
+      const openingScreen = document.getElementById('opening-screen');
+      const openSurpriseBtn = document.getElementById('open-surprise-btn');
+      const mainWorld = document.getElementById('main-world');
+
+      openSurpriseBtn.addEventListener('click', () => {
+        playClickSfx(880);
+        setMusicState(true); // Mulai musik lembut setelah interaksi tombol
+        openingScreen.classList.add('is-hidden');
+        mainWorld.classList.add('is-visible');
+        setTimeout(() => launchConfetti(55), 400);
+      });
+
+      /* -------------------------------------------------------
+         5. INTERACTIVE MOON STORY TOUCH
+      ------------------------------------------------------- */
+      const moonTouch = document.getElementById('moon-touch');
+      const moonCaptionTag = document.getElementById('moon-caption-tag');
+      const moonMessages = [
+        '🌙 Mly bersinar tenang seperti bulan purnama',
+        '✨ Cahaya biru paling indah di malam hari',
+        '💙 Semoga kebahagiaan selalu memeluk Mly — Ciel'
+      ];
+      let moonMsgIndex = 0;
+
+      moonTouch.addEventListener('click', () => {
+        playClickSfx(987.77);
+        moonCaptionTag.textContent = moonMessages[moonMsgIndex % moonMessages.length];
+        moonMsgIndex++;
+        launchConfetti(22);
+      });
+
+      /* -------------------------------------------------------
+         6. MEMORY GALLERY CLICK ANIMATION
+      ------------------------------------------------------- */
+      const memoryCards = document.querySelectorAll('.memory-card');
+      memoryCards.forEach((card) => {
+        const triggerCard = () => {
+          playClickSfx(740);
+          card.classList.remove('is-popped');
+          void card.offsetWidth;
+          card.classList.add('is-popped');
+        };
+        card.addEventListener('click', triggerCard);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            triggerCard();
+          }
+        });
+      });
+
+      /* -------------------------------------------------------
+         7. PIXEL ENVELOPE & TYPE-IN LETTER
+      ------------------------------------------------------- */
+      const envelopeStage = document.getElementById('envelope-stage');
+      const openLetterBtn = document.getElementById('open-letter-btn');
+      const letterPaper = document.getElementById('letter-paper');
+      const letterLines = document.querySelectorAll('.letter-line');
+      let letterOpened = false;
+
+      function openLetter() {
+        playClickSfx(659.25);
+        if (letterOpened) return;
+        letterOpened = true;
+
+        envelopeStage.classList.add('is-open');
+        envelopeStage.setAttribute('aria-expanded', 'true');
+        openLetterBtn.innerHTML = '<span>💌 Surat Terbuka</span>';
+
+        setTimeout(() => {
+          letterPaper.classList.add('is-visible');
+          letterLines.forEach((line, idx) => {
+            setTimeout(() => {
+              line.classList.add('show-line');
+            }, 350 + idx * 520);
+          });
+        }, 320);
+      }
+
+      envelopeStage.addEventListener('click', openLetter);
+      envelopeStage.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLetter();
+        }
+      });
+
+      /* -------------------------------------------------------
+         8. BLUE CAKE & CANDLES INTERACTION
+      ------------------------------------------------------- */
+      const cakeStage = document.getElementById('cake-stage');
+      const blowCandlesBtn = document.getElementById('blow-candles-btn');
+      const confettiBtn = document.getElementById('confetti-btn');
+      const cakeTrigger = document.getElementById('cake-trigger');
+      const wishFeedback = document.getElementById('wish-feedback');
+      let candlesBlown = false;
+
+      function handleCakeWish() {
+        playClickSfx(1046.5);
+        candlesBlown = !candlesBlown;
+
+        if (candlesBlown) {
+          cakeStage.classList.add('candles-blown');
+          blowCandlesBtn.textContent = '✨ Nyalakan Lilin Lagi';
+          wishFeedback.textContent = '✨ Permohonanmu terkirim ke langit biru, Mly! Happy Birthday!';
+          launchConfetti(110);
+        } else {
+          cakeStage.classList.remove('candles-blown');
+          blowCandlesBtn.textContent = '🕯️ Buat Permohonan & Tiup Lilin';
+          wishFeedback.textContent = '🕯️ Lilin biru menyala hangat lagi untuk Mly.';
+        }
+      }
+
+      blowCandlesBtn.addEventListener('click', handleCakeWish);
+      cakeTrigger.addEventListener('click', handleCakeWish);
+      cakeTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCakeWish();
+        }
+      });
+
+      confettiBtn.addEventListener('click', () => {
+        playClickSfx(880);
+        launchConfetti(95);
+        wishFeedback.textContent = '🎉 Selamat Ulang Tahun, Mly! Dari Ciel 💙';
+      });
+
+      /* -------------------------------------------------------
+         9. SCROLL REVEAL OBSERVER
+      ------------------------------------------------------- */
+      const revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('in-view'));
+      }
+    })();
+  </script>
+</body>
+</html>
